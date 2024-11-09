@@ -1,0 +1,35 @@
+version: '0.1'
+database:
+  # consult[https://gorm.io/docs/connecting_to_the_database.html]"
+  dsn: 'host=remote user=weedien password=031209 dbname=wespace search_path=link_single port=5432 sslmode=disable TimeZone=Asia/Shanghai'
+  # input mysql or postgres or sqlite or sqlserver. consult[https://gorm.io/docs/connecting_to_the_database.html]
+  db: 'postgres'
+  # enter the required data table or leave it blank.You can input : orders,users,goods
+  tables:
+    - t_user
+    - t_group
+    - t_link
+    - t_link_goto
+    - t_group_unique
+    - t_link_access_logs
+    - t_link_access_stats
+    - t_link_browser_stats
+    - t_link_device_stats
+    - t_link_locale_stats
+    - t_link_network_stats
+    - t_link_os_stats
+    - t_link_stats_today
+  # specify a directory for output
+  outPath: './internal/common/persistence/dao/'
+  # query code file name, default: gen.go
+  outFile: ''
+  # generate unit test for query code
+  withUnitTest: false
+  # generated entity code's package name
+  modelPkgName: 'po'
+  # generate with pointer when field is nullable
+  fieldNullable: false
+  # generate field with gorm index tag
+  fieldWithIndexTag: false
+  # generate field with gorm column type tag
+  fieldWithTypeTag: false

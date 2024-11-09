@@ -1,0 +1,46 @@
+[app]
+	name = "short-link"
+	author = "weedien"
+	version = "v0.0.1"
+	desc = "基于 DDD 架构的短链接服务"
+
+[server]
+	port = 8081
+	use_ssl = false
+	#	base_path = "/app/short-link/v1"
+
+[app_link]
+	base_route_prefix = "/api/short-link/v1"
+	domain = "localhost:8081"
+	# 白名单可能会过多，考虑放入数据库 根域名下的子域名也会被允许
+	whitelist = ["localhost", "github.com", "juejin.cn", "csdn.net", "zhihu.com"]
+	default_favicon_url = "https://pic.example.com/img/favicon_16x16.ico"
+	max_attempts = 3
+	max_links_per_group = 1000
+
+	[app_link.default]
+		expiration = 30 # 单位: 日
+
+[database]
+	dsn = "host=localhost user=root password=root dbname=public search_path=link port=5432 sslmode=disable TimeZone=Asia/Shanghai"
+	enable_sharding = false
+
+[redis]
+	addr = "127.0.0.1:6379"
+	# username = ""
+	password = ""
+	db = 0
+
+[rocketmq]
+	name_server = "127.0.0.1:8081"
+	topics = ["app_short_link_topic"]
+	#namespace = "weedien"
+	consumer_group = "app_short_link_group"
+	access_key = ""
+	secret_key = ""
+
+[email]
+	smtp_host = "smtp.qq.com"
+	smtp_port = 465
+	username = ""
+	auth_token = ""
